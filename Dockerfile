@@ -1,9 +1,8 @@
 FROM quay.io/quarkus/ubi-quarkus-mandrel-builder-image:jdk-21 AS build
-COPY --chown=quarkus:quarkus --chmod=0755 mvnw /app/mvnw
-COPY --chown=quarkus:quarkus .mvn /app/.mvn
-COPY --chown=quarkus:quarkus pom.xml /app/
+COPY mvnw /app/mvnw
+COPY .mvn /app/.mvn
+COPY pom.xml /app/
 
-USER quarkus
 WORKDIR /app
 COPY src /app/src
 RUN ./mvnw package -Dnative -DskipTests

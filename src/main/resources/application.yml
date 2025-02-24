@@ -1,0 +1,10 @@
+quarkus:
+  datasource:
+    db-kind: postgresql
+    jdbc:
+      url: jdbc:postgresql://${DATABASE_HOST:localhost}:5432/${DATABASE_NAME:saas}
+    username: ${DATABASE_USER:pastejo}
+    password: ${DATABASE_PASSWORD:pastejolocal}
+  hibernate-orm:
+    database:
+      generation: ${DATABASE_GENERATION:update}

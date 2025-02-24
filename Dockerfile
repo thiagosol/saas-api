@@ -1,5 +1,6 @@
 FROM quay.io/quarkus/ubi-quarkus-mandrel-builder-image:jdk-21 AS builder
 
+USER root
 WORKDIR /app
 COPY . .
 RUN chmod +x mvnw

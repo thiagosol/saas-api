@@ -1,15 +1,12 @@
-FROM quay.io/quarkus/ubi-quarkus-mandrel-builder-image:jdk-21 AS build
-COPY mvnw /app/mvnw
-COPY .mvn /app/.mvn
-COPY pom.xml /app/
+FROM quay.io/quarkus/ubi-quarkus-mandrel-builder-image:jdk-21 AS builder
 
 WORKDIR /app
-COPY src /app/src
+COPY . .
 RUN ./mvnw package -Dnative -DskipTests
 
 FROM quay.io/quarkus/quarkus-micro-image:2.0
 WORKDIR /app
-COPY --from=build /app/target/*-runner /app/application
+COPY --from=builder /app/target/*-runner /app/application
 
 RUN chmod 775 /app /app/application \
   && chown -R 1001 /app \

@@ -2,6 +2,7 @@ FROM quay.io/quarkus/ubi-quarkus-mandrel-builder-image:jdk-21 AS builder
 
 WORKDIR /app
 COPY . .
+RUN chmod +x mvnw
 RUN ./mvnw package -Dnative -DskipTests
 
 FROM quay.io/quarkus/quarkus-micro-image:2.0
